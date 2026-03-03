@@ -1,0 +1,1 @@
+# PlatePick-Food-Ordering-App-Mini-Project
