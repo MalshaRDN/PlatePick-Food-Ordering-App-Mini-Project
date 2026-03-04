@@ -1,5 +1,6 @@
 package com.example.platepick;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,18 +39,24 @@ public class CartActivity extends AppCompatActivity {
         // Calculate and display total price
         calculateTotal(cartItems);
 
-        // Checkout Button Click Listener
+        // Checkout Button Click Listener (Updated)
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if the cart is empty
                 if (cartItems.isEmpty()) {
                     Toast.makeText(CartActivity.this, "Your cart is empty!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(CartActivity.this, "Order Placed Successfully!", Toast.LENGTH_LONG).show();
-                    // Clear the cart after checkout
-                    cartItems.clear();
-                    cartAdapter.notifyDataSetChanged();
-                    tvTotalPrice.setText("Total: Rs. 0");
+                    // Get the text from tvTotalPrice (e.g., "Total: Rs. 1500")
+                    String fullTotalText = tvTotalPrice.getText().toString();
+
+                    // Extract just the "Rs. 1500" part to pass to the next screen
+                    String amountOnly = fullTotalText.replace("Total: ", "");
+
+                    // Navigate to CheckoutActivity
+                    Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
+                    intent.putExtra("TOTAL_AMOUNT", amountOnly); // Pass the total amount
+                    startActivity(intent);
                 }
             }
         });
