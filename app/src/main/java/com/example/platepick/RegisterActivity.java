@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class RegisterActivity extends AppCompatActivity {
 
     // Declare variables for UI elements and DatabaseHelper
-    private EditText etRegName, etRegEmail, etRegPassword;
+    private EditText etRegName, etRegEmail, etRegPassword, etRegConfirmPassword;
     private Button btnRegister;
     private DatabaseHelper dbHelper;
 
@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         etRegName = findViewById(R.id.etRegName);
         etRegEmail = findViewById(R.id.etRegEmail);
         etRegPassword = findViewById(R.id.etRegPassword);
+        etRegConfirmPassword = findViewById(R.id.etRegConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -36,10 +37,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = etRegName.getText().toString();
                 String email = etRegEmail.getText().toString();
                 String pass = etRegPassword.getText().toString();
+                String confirmPass = etRegConfirmPassword.getText().toString();
 
                 // Validation: Check if any field is empty
-                if (name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+                if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                } else if (!isPasswordMatch(pass, confirmPass)) {
+                    // Check if passwords match
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match! Please try again.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Try to insert data into SQLite database
                     boolean isInserted = dbHelper.insertData(name, email, pass);
@@ -54,5 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // Function to validate if passwords match
+    private boolean isPasswordMatch(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
     }
 }

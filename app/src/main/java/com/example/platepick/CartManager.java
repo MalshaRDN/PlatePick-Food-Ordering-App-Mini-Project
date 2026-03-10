@@ -24,9 +24,25 @@ public class CartManager {
         return instance;
     }
 
-    // Method to add a new meal to the cart
+    // Method to add a new meal to the cart with quantity
+    public void addToCart(Meal meal, int quantity) {
+        // Check if meal already exists in cart
+        for (Meal item : cartItems) {
+            if (item.getName().equals(meal.getName())) {
+                // Update quantity if meal exists
+                item.setQuantity(item.getQuantity() + quantity);
+                return;
+            }
+        }
+        // Create a new meal with the specified quantity
+        Meal cartMeal = new Meal(meal.getName(), meal.getPrice(), meal.getImageResId());
+        cartMeal.setQuantity(quantity);
+        cartItems.add(cartMeal);
+    }
+
+    // Method to add a new meal to the cart (without quantity parameter for backward compatibility)
     public void addToCart(Meal meal) {
-        cartItems.add(meal);
+        addToCart(meal, 1);
     }
 
     // Method to retrieve all items currently in the cart

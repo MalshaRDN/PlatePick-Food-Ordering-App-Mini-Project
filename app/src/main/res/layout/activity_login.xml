@@ -7,40 +7,68 @@
     android:gravity="center"
     android:background="#FFFFFF">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/platepick_logo"
+        android:layout_marginBottom="1dp"
+        android:contentDescription="@string/app_name"/>
+
     <TextView
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:text="PlatePick"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:textColor="#FF5722"
-        android:layout_marginBottom="40dp"/>
+        android:textSize="42sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:hint="Enter your Email"
+        android:textSize="14sp"
         android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@android:drawable/edit_text"/>
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_border"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="45dp"
         android:hint="Enter your Password"
+        android:textSize="14sp"
         android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:layout_marginBottom="25dp"
-        android:background="@android:drawable/edit_text"/>
+        android:background="@drawable/edittext_border"/>
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:text="LOGIN"
         android:textSize="18sp"
         android:backgroundTint="#FF5722"

@@ -33,7 +33,10 @@ public class CartActivity extends AppCompatActivity {
 
         // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
-        cartAdapter = new CartAdapter(cartItems);
+        cartAdapter = new CartAdapter(cartItems, () -> {
+            // Callback when cart changes (quantity change or item removed)
+            calculateTotal(cartItems);
+        });
         rvCartItems.setAdapter(cartAdapter);
 
         // Calculate and display total price
@@ -64,17 +67,19 @@ public class CartActivity extends AppCompatActivity {
 
     // Method to calculate total amount
     private void calculateTotal(List<Meal> cartItems) {
-        int total = 0;
+        double total = 0;
         for (Meal meal : cartItems) {
             // Remove text "Rs." and any spaces, keep only numbers
             String priceString = meal.getPrice().replaceAll("[^0-9]", "");
             try {
-                total += Integer.parseInt(priceString);
+                double price = Double.parseDouble(priceString);
+                int quantity = meal.getQuantity();
+                total += (price * quantity); // Multiply price by quantity
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
         // Set total price to TextView
-        tvTotalPrice.setText("Total: Rs. " + total);
+        tvTotalPrice.setText("Total: Rs. " + (int)total);
     }
 }

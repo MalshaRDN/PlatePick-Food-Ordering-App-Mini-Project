@@ -5,12 +5,14 @@ public class Meal {
     private String name;
     private String price;
     private int imageResId; // To store the image from drawable folder
+    private int quantity; // To store the quantity
 
     // Constructor
     public Meal(String name, String price, int imageResId) {
         this.name = name;
         this.price = price;
         this.imageResId = imageResId;
+        this.quantity = 1; // Default quantity is 1
     }
 
     // Getters to retrieve the data
@@ -24,5 +26,14 @@ public class Meal {
 
     public int getImageResId() {
         return imageResId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    // Setters
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

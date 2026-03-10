@@ -7,32 +7,79 @@
     android:gravity="center"
     android:background="#FFFFFF">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/platepick_logo"
+        android:layout_marginBottom="1dp"
+        android:contentDescription="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="PlatePick"
+        android:textColor="#FF5722"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Account"
-        android:textSize="28sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#FF5722"
-        android:layout_marginBottom="30dp"/>
+        android:textColor="#555"
+        android:layout_marginBottom="3dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full Name"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etRegName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Full Name"
+        android:textSize="14sp"
         android:paddingLeft="15dp"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/edittext_border"
         android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etRegEmail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Email Address"
+        android:textSize="14sp"
         android:paddingLeft="15dp"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/edittext_border"
         android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etRegPassword"
@@ -40,13 +87,34 @@
         android:layout_height="50dp"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textSize="14sp"
         android:paddingLeft="15dp"
-        android:background="@android:drawable/edit_text"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etRegConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Confirm Password"
+        android:textSize="14sp"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:background="@drawable/edittext_border"
         android:layout_marginBottom="25dp"/>
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="REGISTER"
         android:backgroundTint="#FF5722"
