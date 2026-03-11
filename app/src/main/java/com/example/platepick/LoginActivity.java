@@ -2,6 +2,7 @@ package com.example.platepick;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns; // Added for email validation
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,12 +32,21 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = etEmail.getText().toString();
-                String pass = etPassword.getText().toString();
+                // Added .trim() to prevent accidental trailing spaces
+                String email = etEmail.getText().toString().trim();
+                String pass = etPassword.getText().toString().trim();
 
+                // Validation 1: Check if fields are empty
                 if (email.isEmpty() || pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Please enter both Email and Password", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                // Validation 2: Check if the email format is correct
+                else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etEmail.setError("Please enter a valid email address");
+                    etEmail.requestFocus();
+                }
+                // If all validations pass, check the database
+                else {
                     boolean isUserExist = dbHelper.checkUser(email, pass);
 
                     if (isUserExist) {
@@ -51,6 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
+                        // Added setError to show a visual warning near the password field
+                        etPassword.setError("Invalid Email or Password!");
+                        etPassword.requestFocus();
                         Toast.makeText(LoginActivity.this, "Invalid Email or Password!", Toast.LENGTH_SHORT).show();
                     }
                 }
