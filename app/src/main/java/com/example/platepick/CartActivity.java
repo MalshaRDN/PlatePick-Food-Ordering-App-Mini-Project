@@ -38,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
         // Setup RecyclerView
         rvCartItems.setLayoutManager(new LinearLayoutManager(this));
         cartAdapter = new CartAdapter(cartItems, () -> {
-            // Callback when cart changes (quantity change or item removed)
+            // Callback when cart changes
             calculateTotal(cartItems);
         });
         rvCartItems.setAdapter(cartAdapter);
@@ -46,7 +46,7 @@ public class CartActivity extends AppCompatActivity {
         // Calculate and display total price
         calculateTotal(cartItems);
 
-        // Checkout Button Click Listener (Updated)
+        // Checkout Button Click Listener
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,10 +54,9 @@ public class CartActivity extends AppCompatActivity {
                 if (cartItems.isEmpty()) {
                     Toast.makeText(CartActivity.this, "Your cart is empty!", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Get the text from tvTotalPrice (e.g., "Total: Rs. 1500")
+                    // Get the text from tvTotalPrice
                     String fullTotalText = tvTotalPrice.getText().toString();
 
-                    // Extract just the "Rs. 1500" part to pass to the next screen
                     String amountOnly = fullTotalText.replace("Total: ", "");
 
                     // Navigate to CheckoutActivity

@@ -51,16 +51,16 @@ public class LoginActivity extends AppCompatActivity {
                     if (isUserExist) {
                         String name = dbHelper.getUsername(email);
 
-                        // ---------------------------------------------------------
-                        // NEW: Save user session using SharedPreferences
-                        // ---------------------------------------------------------
+
+
+
                         android.content.SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         android.content.SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("USER_NAME", name);
                         editor.putString("USER_EMAIL", email);
                         editor.putBoolean("IS_LOGGED_IN", true);
                         editor.apply();
-                        // ---------------------------------------------------------
+
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("USER_NAME", name);
