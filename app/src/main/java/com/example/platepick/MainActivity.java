@@ -1,6 +1,7 @@
 package com.example.platepick;
 
 import android.content.Intent;
+import android.content.SharedPreferences; // Added for SharedPreferences
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,8 +43,24 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivCart = findViewById(R.id.ivCart);
         ImageView ivOrderHistory = findViewById(R.id.ivOrderHistory);
 
-        userName = getIntent().getStringExtra("USER_NAME");
-        userEmail = getIntent().getStringExtra("USER_EMAIL");
+        // ---------------------------------------------------------
+        // NEW: Get user details from SharedPreferences instead of Intent
+        // ---------------------------------------------------------
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("IS_LOGGED_IN", false);
+
+        // If the user is not logged in, redirect them to LoginActivity
+        if (!isLoggedIn) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Close MainActivity
+            return; // Stop further execution
+        }
+
+        userName = sharedPreferences.getString("USER_NAME", "User");
+        userEmail = sharedPreferences.getString("USER_EMAIL", "");
+        // ---------------------------------------------------------
+
         updateWelcomeText();
 
         ivProfile.setOnClickListener(v -> {
@@ -111,9 +128,19 @@ public class MainActivity extends AppCompatActivity {
 
             if (updatedName != null && !updatedName.trim().isEmpty()) {
                 userName = updatedName;
+
+                // Update SharedPreferences with the new name
+                SharedPreferences.Editor editor = getSharedPreferences("UserPrefs", MODE_PRIVATE).edit();
+                editor.putString("USER_NAME", userName);
+                editor.apply();
             }
             if (updatedEmail != null && !updatedEmail.trim().isEmpty()) {
                 userEmail = updatedEmail;
+
+                // Update SharedPreferences with the new email
+                SharedPreferences.Editor editor = getSharedPreferences("UserPrefs", MODE_PRIVATE).edit();
+                editor.putString("USER_EMAIL", userEmail);
+                editor.apply();
             }
 
             updateWelcomeText();
