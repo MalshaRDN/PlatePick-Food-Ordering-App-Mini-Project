@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ivCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
-        ivOrderHistory.setOnClickListener(v -> Toast.makeText(this, "Order History selected", Toast.LENGTH_SHORT).show());
+        ivOrderHistory.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OrderHistoryActivity.class)));
 
 
         rvBurgers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
