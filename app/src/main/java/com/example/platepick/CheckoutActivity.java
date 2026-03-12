@@ -40,14 +40,31 @@ public class CheckoutActivity extends AppCompatActivity {
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get input values
-                String address = etAddress.getText().toString();
-                String phone = etPhone.getText().toString();
+                // Get input values and remove extra spaces using .trim()
+                String address = etAddress.getText().toString().trim();
+                String phone = etPhone.getText().toString().trim();
 
-                // Validate if fields are empty
+                // Regex pattern for a 10-digit phone number starting with '0'
+                String phonePattern = "^0[0-9]{9}$";
+
+                // Validation 1: Check if fields are empty
                 if (address.isEmpty() || phone.isEmpty()) {
                     Toast.makeText(CheckoutActivity.this, "Please fill in all delivery details", Toast.LENGTH_SHORT).show();
-                } else {
+                    if (address.isEmpty()) etAddress.setError("Delivery address is required");
+                    if (phone.isEmpty()) etPhone.setError("Phone number is required");
+                }
+                // Validation 2: Check if address is too short (less than 10 characters)
+                else if (address.length() < 10) {
+                    etAddress.setError("Please enter a complete delivery address");
+                    etAddress.requestFocus();
+                }
+                // Validation 3: Check if phone number is valid
+                else if (!phone.matches(phonePattern)) {
+                    etPhone.setError("Please enter a valid 10-digit phone number (e.g. 0712345678)");
+                    etPhone.requestFocus();
+                }
+                // If all validations pass, proceed with placing the order
+                else {
                     // Order is successful
                     Toast.makeText(CheckoutActivity.this, "Order Placed Successfully! Food is on the way.", Toast.LENGTH_LONG).show();
 
