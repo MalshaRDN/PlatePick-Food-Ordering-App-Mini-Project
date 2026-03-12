@@ -17,6 +17,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView tvTotalPrice;
     private Button btnCheckout;
     private CartAdapter cartAdapter;
+    private String userName, userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,9 @@ public class CartActivity extends AppCompatActivity {
         rvCartItems = findViewById(R.id.rvCartItems);
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         btnCheckout = findViewById(R.id.btnCheckout);
+
+        userName = getIntent().getStringExtra("USER_NAME");
+        userEmail = getIntent().getStringExtra("USER_EMAIL");
 
         // Get cart items from CartManager
         List<Meal> cartItems = CartManager.getInstance().getCartItems();
@@ -59,6 +63,9 @@ public class CartActivity extends AppCompatActivity {
                     // Navigate to CheckoutActivity
                     Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
                     intent.putExtra("TOTAL_AMOUNT", amountOnly); // Pass the total amount
+
+                    intent.putExtra("USER_NAME", userName);
+                    intent.putExtra("USER_EMAIL", userEmail);
                     startActivity(intent);
                 }
             }
