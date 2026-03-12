@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     boolean isUserExist = dbHelper.checkUser(email, pass);
 
                     if (isUserExist) {
-                        String name = dbHelper.getUsername(email); // Get name from DB
+                        String name = dbHelper.getUsername(email);
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("USER_NAME", name);
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
+                        // Show error if login fails
                         etPassword.setError("Invalid Email or Password!");
                         etPassword.requestFocus();
                         Toast.makeText(LoginActivity.this, "Invalid Email or Password!", Toast.LENGTH_SHORT).show();
