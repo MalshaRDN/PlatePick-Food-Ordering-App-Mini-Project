@@ -26,6 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
         etProfileEmail = findViewById(R.id.etProfileEmail);
         etProfilePassword = findViewById(R.id.etProfilePassword);
         Button btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
+        Button btnSignOut = findViewById(R.id.btnSignOut);
 
         currentEmail = getIntent().getStringExtra("USER_EMAIL");
 
@@ -38,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         loadProfile(currentEmail);
 
         btnUpdateProfile.setOnClickListener(v -> updateProfile());
+        btnSignOut.setOnClickListener(v -> signOut());
     }
 
     private void loadProfile(String email) {
@@ -82,6 +84,13 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Failed to update profile.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void signOut() {
+        Intent intent = new Intent(ProfileActivity.this, WelcomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private boolean isValidPassword(String password) {
