@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         rvDrinks = findViewById(R.id.rvDrinks);
         rvMixRice = findViewById(R.id.rvMixRice);
         ImageView ivProfile = findViewById(R.id.ivProfile);
+        ImageView ivCart = findViewById(R.id.ivCart);
+        ImageView ivOrderHistory = findViewById(R.id.ivOrderHistory);
 
         userName = getIntent().getStringExtra("USER_NAME");
         userEmail = getIntent().getStringExtra("USER_EMAIL");
@@ -46,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("USER_EMAIL", userEmail);
             startActivityForResult(intent, PROFILE_REQUEST_CODE);
         });
+
+        ivCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+        ivOrderHistory.setOnClickListener(v -> Toast.makeText(this, "Order History selected", Toast.LENGTH_SHORT).show());
+
 
         rvBurgers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvPizzas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -82,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
         mixRiceAdapter = new MealAdapter(mixRiceList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvMixRice.setAdapter(mixRiceAdapter);
 
-
-        TextView tvCart = findViewById(R.id.tvCart);
-        tvCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
 
     private void updateWelcomeText() {
