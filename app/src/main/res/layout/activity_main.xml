@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvWelcomeUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello, User!"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:paddingLeft="16dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
-
     <!-- Navigation Bar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -34,34 +22,48 @@
             android:paddingRight="16dp">
 
             <!-- Search Bar -->
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:hint="Search food..."
-                android:paddingLeft="12dp"
-                android:background="@drawable/search_bar_bg"
-                android:textColorHint="#999999"
-                android:textColor="#333333"
-                android:layout_marginRight="12dp"
-                android:inputType="text" />
 
             <!-- Cart Icon and Text -->
+
+            <TextView
+                android:id="@+id/tvWelcomeUser"
+                android:layout_width="236dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Hello, User!"
+                android:textColor="#333333"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/cart_button_bg"
+                android:clickable="true"
+                android:contentDescription="Profile"
+                android:focusable="true"
+                android:padding="8dp"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:tint="#FF5722" />
+
             <TextView
                 android:id="@+id/tvCart"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:background="@drawable/cart_button_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:text="Cart"
                 android:textColor="#FF5722"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/cart_button_bg"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
