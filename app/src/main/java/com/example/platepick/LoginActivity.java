@@ -1,9 +1,8 @@
 package com.example.platepick;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Patterns; // Added for email validation
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Only declare email and pass once
-                String email = etEmail.getText().toString().trim();
-                String pass = etPassword.getText().toString().trim();        if (email.isEmpty() || pass.isEmpty()) {
-                // Added .trim() to prevent accidental trailing spaces
                 String email = etEmail.getText().toString().trim();
                 String pass = etPassword.getText().toString().trim();
 
@@ -53,18 +48,15 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     boolean isUserExist = dbHelper.checkUser(email, pass);
 
-                    // Inside LoginActivity.java after checking database
                     if (isUserExist) {
                         String name = dbHelper.getUsername(email); // Get name from DB
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("USER_NAME", name);    // This key must match MainActivity
+                        intent.putExtra("USER_NAME", name);
                         intent.putExtra("USER_EMAIL", email);
                         startActivity(intent);
                         finish();
-                    }else {
                     } else {
-                        // Added setError to show a visual warning near the password field
                         etPassword.setError("Invalid Email or Password!");
                         etPassword.requestFocus();
                         Toast.makeText(LoginActivity.this, "Invalid Email or Password!", Toast.LENGTH_SHORT).show();
