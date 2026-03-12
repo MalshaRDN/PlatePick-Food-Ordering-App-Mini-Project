@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1. INITIALIZE VIEWS (Crucial: Added etSearch here)
+        // 1. INITIALIZE VIEWS
         tvWelcomeUser = findViewById(R.id.tvWelcomeUser);
         rvBurgers = findViewById(R.id.rvBurgers);
         rvPizzas = findViewById(R.id.rvPizzas);
@@ -43,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivCart = findViewById(R.id.ivCart);
         ImageView ivOrderHistory = findViewById(R.id.ivOrderHistory);
 
-        // ---------------------------------------------------------
-        // NEW: Get user details from SharedPreferences instead of Intent
-        // ---------------------------------------------------------
+
+
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("IS_LOGGED_IN", false);
 
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         userName = sharedPreferences.getString("USER_NAME", "User");
         userEmail = sharedPreferences.getString("USER_EMAIL", "");
-        // ---------------------------------------------------------
+
 
         updateWelcomeText();
 
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         burgerAdapter = new MealAdapter(burgerList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvBurgers.setAdapter(burgerAdapter);
 
-        // --- PIZZAS --- (FIXED: Initialized list BEFORE setting adapter)
+        // --- PIZZAS ---
         pizzaList = new ArrayList<>();
         pizzaList.add(new Meal("Margherita Pizza", "1200", R.drawable.pizza1));
         pizzaList.add(new Meal("Pepperoni Pizza", "1500", R.drawable.pizza2));

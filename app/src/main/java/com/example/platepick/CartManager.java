@@ -40,7 +40,7 @@ public class CartManager {
         cartItems.add(cartMeal);
     }
 
-    // Method to add a new meal to the cart (without quantity parameter for backward compatibility)
+    // Method to add a new meal to the cart
     public void addToCart(Meal meal) {
         addToCart(meal, 1);
     }
