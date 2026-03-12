@@ -17,6 +17,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private EditText etAddress, etPhone;
     private RadioGroup rgPaymentMethod;
     private Button btnPlaceOrder;
+    private String userName, userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class CheckoutActivity extends AppCompatActivity {
             tvCheckoutTotal.setText("Total Amount: " + totalAmount);
         }
 
+        userName = getIntent().getStringExtra("USER_NAME");
+        userEmail = getIntent().getStringExtra("USER_EMAIL");
+
         // Place Order Button Click Listener
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,11 +55,21 @@ public class CheckoutActivity extends AppCompatActivity {
                     // Order is successful
                     Toast.makeText(CheckoutActivity.this, "Order Placed Successfully! Food is on the way.", Toast.LENGTH_LONG).show();
 
+                    // Save this order before clearing cart
+                    OrderHistoryManager.saveOrder(
+                            CheckoutActivity.this,
+                            CartManager.getInstance().getCartItems(),
+                            totalAmount
+                    );
+
                     // Clear the cart since the order is done
                     CartManager.getInstance().getCartItems().clear();
 
                     // Navigate back to MainActivity (Home Screen)
                     Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
+
+                    intent.putExtra("USER_NAME", userName);
+                    intent.putExtra("USER_EMAIL", userEmail);
                     // Clear previous activities so user can't press back to go to checkout again
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

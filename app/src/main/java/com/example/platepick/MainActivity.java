@@ -52,8 +52,19 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, PROFILE_REQUEST_CODE);
         });
 
-        ivCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
-        ivOrderHistory.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OrderHistoryActivity.class)));
+        ivCart.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CartActivity.class);
+            intent.putExtra("USER_NAME", userName);
+            intent.putExtra("USER_EMAIL", userEmail);
+            startActivity(intent);
+        });
+
+        ivOrderHistory.setOnClickListener(v -> {
+            // FIX: Ensure the email is passed so OrderHistoryActivity knows whose orders to show
+            Intent intent = new Intent(MainActivity.this, OrderHistoryActivity.class);
+            intent.putExtra("USER_EMAIL", userEmail);
+            startActivity(intent);
+        });
 
 
         rvBurgers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -160,4 +171,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return filtered;
     }
+
 }
