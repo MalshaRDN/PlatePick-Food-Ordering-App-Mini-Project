@@ -91,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
         mixRiceAdapter = new MealAdapter(mixRiceList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvMixRice.setAdapter(mixRiceAdapter);
 
-
-        TextView tvCart = findViewById(R.id.tvCart);
-        tvCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
 
     private void updateWelcomeText() {
