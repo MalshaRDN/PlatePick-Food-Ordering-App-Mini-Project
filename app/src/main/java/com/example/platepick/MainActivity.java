@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         burgerList.add(new Meal("Chicken Burger", "850", R.drawable.chicken_burger));
         burgerList.add(new Meal("Beef Burger", "1050", R.drawable.beef_burger));
         burgerList.add(new Meal("Veggie Burger", "750", R.drawable.veggie_burger));
+        burgerList.add(new Meal("Cheese Burger", "850", R.drawable.burger1));
+        burgerList.add(new Meal("Juicy HamBurger", "950", R.drawable.burger2));
         burgerAdapter = new MealAdapter(burgerList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvBurgers.setAdapter(burgerAdapter);
 
@@ -100,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
         pizzaList = new ArrayList<>();
         pizzaList.add(new Meal("Margherita Pizza", "1200", R.drawable.pizza1));
         pizzaList.add(new Meal("Pepperoni Pizza", "1500", R.drawable.pizza2));
+        pizzaList.add(new Meal("Cheese Pizza", "1500", R.drawable.cheese_pizza));
+        pizzaList.add(new Meal("BBQ Chicken Pizza", "1700", R.drawable.bbq_chicken_pizza));
+        pizzaList.add(new Meal("Cheese Pizza", "1800", R.drawable.cheese_pizza));
 
         pizzaAdapter = new MealAdapter(pizzaList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvPizzas.setAdapter(pizzaAdapter);
@@ -108,13 +113,22 @@ public class MainActivity extends AppCompatActivity {
         drinkList = new ArrayList<>();
         drinkList.add(new Meal("Coca Cola", "300", R.drawable.coca_cola));
         drinkList.add(new Meal("Milkshake", "600", R.drawable.milkshake));
+        drinkList.add(new Meal("Orange Juice", "600", R.drawable.orange_juice));
+        drinkList.add(new Meal("Mocktail", "400", R.drawable.drink1));
+        drinkList.add(new Meal("Kivi Juice", "700", R.drawable.drink4));
+
+
+
         drinkAdapter = new MealAdapter(drinkList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvDrinks.setAdapter(drinkAdapter);
 
         // --- MIX RICE ---
         mixRiceList = new ArrayList<>();
-        mixRiceList.add(new Meal("Mix Rice 1", "650", R.drawable.mixrice1));
-        mixRiceList.add(new Meal("Mix Rice 2", "700", R.drawable.mixrice2));
+        mixRiceList.add(new Meal("Prawn Rice", "1000", R.drawable.mixrice1));
+        mixRiceList.add(new Meal("Vegetable Rice", "700", R.drawable.mixrice2));
+        mixRiceList.add(new Meal("Chicken Rice", "800", R.drawable.chicken_rice));
+        mixRiceList.add(new Meal("Egg Rice", "600", R.drawable.egg_rice));
+
         mixRiceAdapter = new MealAdapter(mixRiceList, (meal, quantity) -> CartManager.getInstance().addToCart(meal, quantity));
         rvMixRice.setAdapter(mixRiceAdapter);
 
