@@ -61,6 +61,13 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
 
+        if (!isValidPassword(updatedPassword)) {
+            Toast.makeText(this,
+                    "Password must be at least 8 characters and include upper/lowercase letters, a number, and a special character.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         boolean updated = dbHelper.updateUserProfile(currentEmail, updatedUsername, updatedEmail, updatedPassword);
         if (updated) {
             currentEmail = updatedEmail;
@@ -69,4 +76,31 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Failed to update profile.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private boolean isValidPassword(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUppercase = false;
+        boolean hasLowercase = false;
+        boolean hasDigit = false;
+        boolean hasSpecialCharacter = false;
+
+        for (char character : password.toCharArray()) {
+            if (Character.isUpperCase(character)) {
+                hasUppercase = true;
+            } else if (Character.isLowerCase(character)) {
+                hasLowercase = true;
+            } else if (Character.isDigit(character)) {
+                hasDigit = true;
+            } else {
+                hasSpecialCharacter = true;
+            }
+        }
+
+        return hasUppercase && hasLowercase && hasDigit && hasSpecialCharacter;
+    }
+
 }
+
